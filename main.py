@@ -14,3 +14,7 @@ for line in lines[3:]:
     matriz_adj[u][v] = 1
     matriz_adj[v][u] = 1
 
+lista_queimados = [inicio_fogo]
+lista_defendidos = []
+
+
