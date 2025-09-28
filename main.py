@@ -17,4 +17,20 @@ for line in lines[3:]:
 lista_queimados = [inicio_fogo]
 lista_defendidos = []
 
+#analisar os vizinhos do ponto de fogo e os seus vizinhos
+def analisar_vizinhos(matriz_adj, qnt_vertices, inicio_fogo, lista_queimados):
+    lista_filhos = []
+    lista_netos = []
+    netos_vertice = []
+    for filho in range(qnt_vertices):
+        if matriz_adj[inicio_fogo][filho] == 1 and filho not in lista_queimados:
+            lista_filhos.append(filho)
+    for filho in lista_filhos:
+        for neto in range(qnt_vertices):
+            netos_vertice = []
+            if matriz_adj[filho][neto] == 1 and neto not in lista_queimados:
+                netos_vertice.append(neto)
+        lista_netos.append((filho, netos_vertice))
 
+    #agora, tem que ordenar a lista de netos de acordo com o tamanho da lista de netos
+    #com isso, retorna os D (numero de bombeiros disponiveis) primeiros elementos da lista de netos
