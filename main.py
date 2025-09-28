@@ -18,7 +18,7 @@ lista_queimados = [inicio_fogo]
 lista_defendidos = []
 
 #analisar os vizinhos do ponto de fogo e os seus vizinhos
-def analisar_vizinhos(matriz_adj, qnt_vertices, inicio_fogo, lista_queimados):
+def analisar_vizinhos(matriz_adj, qnt_vertices, inicio_fogo, lista_queimados, num_bombeiros):
     lista_filhos = []
     lista_netos = []
     netos_vertice = []
@@ -33,4 +33,6 @@ def analisar_vizinhos(matriz_adj, qnt_vertices, inicio_fogo, lista_queimados):
         lista_netos.append((filho, netos_vertice))
 
     #agora, tem que ordenar a lista de netos de acordo com o tamanho da lista de netos
+    lista_netos.sort(key=lambda x: len(x[1]), reverse=True)
     #com isso, retorna os D (numero de bombeiros disponiveis) primeiros elementos da lista de netos
+    return [filho for filho, _ in lista_netos[:num_bombeiros]]
