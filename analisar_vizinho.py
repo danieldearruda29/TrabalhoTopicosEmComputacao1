@@ -1,5 +1,5 @@
-def vertices_dos_bombeiros(matriz_adj, qnt_vertices, inicio_fogo, lista_queimados, num_bombeiros):
-    lista_vizinhos = proximos_queimados(qnt_vertices, matriz_adj, inicio_fogo, lista_queimados)
+def vertices_dos_bombeiros(matriz_adj, qnt_vertices, inicio_fogo, lista_queimados, num_bombeiros, lista_defendidos):
+    lista_vizinhos = proximos_queimados(qnt_vertices, matriz_adj, inicio_fogo, lista_queimados, lista_defendidos)
     lista_vizinhos_grau2 = []
     netos_vertice = []
     for vizinho in lista_vizinhos:
@@ -14,9 +14,9 @@ def vertices_dos_bombeiros(matriz_adj, qnt_vertices, inicio_fogo, lista_queimado
     #com isso, retorna os D (numero de bombeiros disponiveis) primeiros elementos da lista de netos
     return [filho for filho, _ in lista_vizinhos_grau2[:num_bombeiros]]
 
-def proximos_queimados(qnt_vertices, matriz_adj, inicio_fogo, lista_queimados):
+def proximos_queimados(qnt_vertices, matriz_adj, inicio_fogo, lista_queimados, lista_defendidos):
     lista_vizinhos = []
     for vizinho in range(qnt_vertices):
-        if matriz_adj[inicio_fogo][vizinho] == 1 and vizinho not in lista_queimados:
+        if matriz_adj[inicio_fogo][vizinho] == 1 and vizinho not in lista_queimados and vizinho not in lista_defendidos:
             lista_vizinhos.append(vizinho)
     return lista_vizinhos
